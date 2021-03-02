@@ -431,7 +431,8 @@ def main():
     #mwjobs.ref_map(file='files/PC_Doors.csv', img='files/PC_CellExport.png', top=-35, bottom=-58, left=-141, right=-108)
     #mwjobs.exterior_doors(file='files/TR_Doors.csv')
     #mwjobs.ref_map(file='files/TR_Doors.csv', img='files/TR_CellExport.png', top=29, bottom=-59, left=-39, right=49)
-    
+    mwjobs.dump_dialogue(file='files/Dump.csv')
+
     time_spent = time.time() - start_time
     print("\n** Time spent: {:.3f} seconds **".format(time_spent))
 

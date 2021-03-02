@@ -199,6 +199,14 @@ def filtered_dialogue(actor="", race="", class_="", faction="", cell="", pc_fact
             print(info.record_details())
             print()
 
+def dump_dialogue(file):
+    cols = ['Topic', 'Disp', 'Actor', 'Cell', 'Entry', 'Sex', 'Race', 'Class', 'Faction', 'Rank', 'PCFaction', 'PCRank', 'FunVar', 'Result']
+    data = []
+    for info in mwglobals.records["INFO"]:
+        data.append([info.dial.name, info.disposition, info.actor, info.cell, info.response, info.sex, info.race, info.class_, info.faction, info.rank, info.pc_faction, info.pc_rank, info.func_var_filters, info.result])
+    entries = pd.DataFrame(data, columns=cols)
+    entries.to_csv(file, index=False, header=True)
+
 def exterior_doors(file):
     doorfile = open('exceptions/mwdoor.txt','r')
     doorlist = doorfile.read().splitlines()
