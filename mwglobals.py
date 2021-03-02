@@ -1,7 +1,7 @@
 from collections import defaultdict
 from enum import Enum
 
-DATA_PATH = "C:/Games/Morrowind/Data Files/"
+DATA_PATH = "C:/Program Files (x86)/GOG Galaxy/Games/Morrowind/Data Files/"
 
 RECORDS_ALL = ["TES3", "GMST", "GLOB", "CLAS", "FACT", "RACE", "SOUN", "SKIL", "MGEF", "SCPT", "REGN", "BSGN", "LTEX", "STAT", "DOOR", "MISC", "WEAP", "CONT", "SPEL", "CREA", "BODY", "LIGH", "ENCH", "NPC_", "ARMO", "CLOT", "REPA", "ACTI", "APPA", "LOCK", "PROB", "INGR", "BOOK", "ALCH", "LEVI", "LEVC", "CELL", "LAND", "PGRD", "SNDG", "DIAL", "INFO", "SSCR"]
 

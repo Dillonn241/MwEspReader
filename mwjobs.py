@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 import pandas as pd
-import seaborn as sns
 import tkinter as tk
 
 import mwglobals
@@ -247,6 +246,7 @@ def ref_map(file, img, top, bottom, left, right):
     ref_locs = ref_locs[ref_locs.Check != 2]
     ref_locs.PosX = ref_locs.PosX/pow(2,13)
     ref_locs.PosY = ref_locs.PosY/pow(2,13)
+    ref_locs['Check'] = ref_locs['Check'].map({0: '#00FFFF', 1: '#FF0000'})
     cellexp = plt.imread(img)
     h, w, _ = cellexp.shape
     h = h/256
@@ -263,9 +263,11 @@ def ref_map(file, img, top, bottom, left, right):
     ax.get_xaxis().set_minor_locator(MultipleLocator(1))
     ax.get_yaxis().set_minor_locator(MultipleLocator(1))
     ax.imshow(cellexp, extent=(left, right+1, bottom, top+1))
-    g = sns.scatterplot(x='PosX', y='PosY', hue='Check', data=ref_locs, ax=ax, marker='.', size=2, edgecolor=None, palette=sns.color_palette('bright',3))
-    g.legend([],[], frameon=False)
-    fig.savefig("Refs.png", dpi=256)
+    ax.scatter(ref_locs.PosX, ref_locs.PosY, c = ref_locs.Check, marker='.', s=4, edgecolor=None)
+    ax.legend([],[], frameon=False)
+    del ref_locs
+    del cellexp
+    fig.savefig("files/Refs.png", dpi=256, bbox_inches='tight')
 
 def print_trainers_by_skill():
     trainers = {}

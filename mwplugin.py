@@ -74,7 +74,7 @@ def init():
     
     """Load any plugins you want. Masters are automatically loaded."""
     # Vanilla
-    #load_plugin("Morrowind.esm")
+    load_plugin("Morrowind.esm")
     #load_plugin("Tribunal.esm")
     #load_plugin("Bloodmoon.esm")
     
@@ -109,13 +109,14 @@ def init():
     #load_plugin("TR_Factions.esp")
     #load_plugin("TR_Travels.esp")
     #load_plugin("TR_Travels_(Preview_and_Mainland).esp")
-    #load_plugin("TR_Andothren_v.0050.esp")
-    #load_plugin("TR_RorynsBluff_v0209.esp")
-    #load_plugin("TR_ArmunAshlands_v0040.esp")
+    #load_plugin("TR_Andothren_v0055.esp")
+    #load_plugin("TR_RorynsBluff_v0211.esp")
+    #load_plugin("TR_ArmunAshlands_v0042.esp")
     #load_plugin("TR_SouthernVelothis_v.0009.esp")
     #load_plugin("TR_ThirrValley_v0070.ESP")
     #load_plugin("TR_Kartur_v0021.esp")
     #load_plugin("TR_RestExterior.esp")
+    #load_plugin("TR_Firemoth.esp")
     
     # Skyrim: Home of the Nords
     #load_plugin("Sky_Main_2020_12_31.esp")
@@ -428,6 +429,8 @@ def main():
     #mwjobs.ref_map(file='files/SHOTN_Creas.csv', img='files/SHOTN_CellExport.png', top=23, bottom=-3, left=-120, right=-94)
     #mwjobs.exterior_doors(file='files/PC_Doors.csv')
     #mwjobs.ref_map(file='files/PC_Doors.csv', img='files/PC_CellExport.png', top=-35, bottom=-58, left=-141, right=-108)
+    #mwjobs.exterior_doors(file='files/TR_Doors.csv')
+    #mwjobs.ref_map(file='files/TR_Doors.csv', img='files/TR_CellExport.png', top=29, bottom=-59, left=-39, right=49)
     
     time_spent = time.time() - start_time
     print("\n** Time spent: {:.3f} seconds **".format(time_spent))
