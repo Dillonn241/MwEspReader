@@ -200,10 +200,33 @@ def filtered_dialogue(actor="", race="", class_="", faction="", cell="", pc_fact
             print()
 
 def dump_dialogue(file):
-    cols = ['Topic', 'Disp', 'Actor', 'Cell', 'Entry', 'Sex', 'Race', 'Class', 'Faction', 'Rank', 'PCFaction', 'PCRank', 'FunVar', 'Result']
+    journaldata = []
+    for info in mwglobals.records["INFO"]:
+        if info.quest_name:
+            journaldata.append([info.dial.name, info.response])
+    journaldata = pd.DataFrame(journaldata, columns=['ID', 'Name'])
+    journaldata = journaldata.drop_duplicates(subset=['ID'], keep='last')
+    npcdata = []
+    for cell in mwglobals.records["CELL"]:
+        for ref in cell.references:
+            obj = mwglobals.object_ids[ref.id]
+            if isinstance(obj, mwnpc_.MwNPC_) and not ref.deleted:
+                npcfilter = cell.id.split(',')[0]
+                npcdata.append([obj.id, npcfilter])
+    npcs = pd.DataFrame(npcdata, columns=['Name', 'Cell'])
+    npcs['Freq'] = npcs.groupby('Name')['Name'].transform('count')
+    cols = ['Topic', 'Disp', 'Actor', 'Cell', 'Entry', 'Sex', 'Race', 'Class', 'Faction', 'Rank', 'PCFaction', 'PCRank', 'FunVar', 'Result', 'Filters']
     data = []
     for info in mwglobals.records["INFO"]:
-        data.append([info.dial.name, info.disposition, info.actor, info.cell, info.response, info.sex, info.race, info.class_, info.faction, info.rank, info.pc_faction, info.pc_rank, info.func_var_filters, info.result])
+        dialfilter = ""
+        if info.cell is not None:
+            dialfilter += ";CELL:" + info.cell.split(',')[0]
+        elif info.actor is not None and npcs[npcs['Name'] == info.actor]['Freq'].min() == 1:
+            if npcs.loc[npcs['Name'] == info.actor, 'Cell'].item() != "":
+                dialfilter += ";CELL:" + npcs.loc[npcs['Name'] == info.actor, 'Cell'].item()
+        if info.actor is not None:
+            dialfilter += ";NPC:" + info.actor
+        data.append([info.dial.name, info.disposition, info.actor, info.cell, info.response, info.sex, info.race, info.class_, info.faction, info.rank, info.pc_faction, info.pc_rank, info.func_var_filters, info.result, dialfilter])
     entries = pd.DataFrame(data, columns=cols)
     entries.to_csv(file, index=False, header=True)
 

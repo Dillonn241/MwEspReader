@@ -75,8 +75,8 @@ def init():
     """Load any plugins you want. Masters are automatically loaded."""
     # Vanilla
     load_plugin("Morrowind.esm")
-    #load_plugin("Tribunal.esm")
-    #load_plugin("Bloodmoon.esm")
+    load_plugin("Tribunal.esm")
+    load_plugin("Bloodmoon.esm")
     
     # DLC
     #load_plugin("adamantiumarmor.esp")
